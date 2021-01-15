@@ -1,0 +1,11 @@
+applicationhost.config
+.vs
+packages
+*.cache
+
+# all bin folders
+bin
+
+#obj/Debug
+
+CompanyEmployees/CompanyEmployees/obj
