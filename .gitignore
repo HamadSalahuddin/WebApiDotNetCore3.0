@@ -9,3 +9,5 @@ bin
 #obj/Debug
 
 CompanyEmployees/CompanyEmployees/obj
+CompanyEmployees/Contracts/obj
+CompanyEmployees/LoggerService/obj
