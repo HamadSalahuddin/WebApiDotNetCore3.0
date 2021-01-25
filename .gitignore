@@ -6,6 +6,11 @@ packages
 # all bin folders
 bin
 
+#logs
+
+CompanyEmployees/internallogs
+CompanyEmployees/logs
+
 #obj/Debug
 
 CompanyEmployees/CompanyEmployees/obj
