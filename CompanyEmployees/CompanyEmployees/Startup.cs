@@ -1,3 +1,4 @@
+using AutoMapper;
 using CompanyEmployees.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,6 +35,7 @@ namespace CompanyEmployees
             services.ConfigureLoggerService();
             services.ConfigureSqlContext(Configuration);
             services.ConfigureRepositoryManager();
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddControllers();
         }
