@@ -1,5 +1,6 @@
 using AutoMapper;
 using CompanyEmployees.Extensions;
+using Contracts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -41,7 +42,11 @@ namespace CompanyEmployees
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(
+            IApplicationBuilder app,
+            IWebHostEnvironment env,
+            ILoggerManager logger
+        )
         {
             if (env.IsDevelopment())
             {
@@ -56,6 +61,8 @@ namespace CompanyEmployees
             {
                 ForwardedHeaders = Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.All
             });
+
+            app.ConfigureExceptionHandler(logger);
 
             app.UseHttpsRedirection();
 
