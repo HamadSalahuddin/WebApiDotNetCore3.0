@@ -1628,3 +1628,4 @@
 2021-05-24 15:35:18.0566 Trace Opening F:\Repositories\GitRepos\WebApiDotNetCore3.0\CompanyEmployees\logs\2021-05-24_logfile.txt with allowFileSharedWriting=False
 2021-05-24 15:35:18.0566 Trace Opening F:\Repositories\GitRepos\WebApiDotNetCore3.0\CompanyEmployees\logs\2021-05-24_logfile.txt with allowFileSharedWriting=False
 2021-05-24 15:35:24.5618 Trace Opening F:\Repositories\GitRepos\WebApiDotNetCore3.0\CompanyEmployees\logs\2021-05-24_logfile.txt with allowFileSharedWriting=False
+2021-05-24 15:43:03.0128 Trace Opening F:\Repositories\GitRepos\WebApiDotNetCore3.0\CompanyEmployees\logs\2021-05-24_logfile.txt with allowFileSharedWriting=False
