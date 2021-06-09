@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public class EmployeeRepository : RepositoryBase<Employee>, IEmployeeRepository
-    {
-        public EmployeeRepository(RepositoryContext repositoryContext) : base(repositoryContext)
+    public class EmployeeRepository : RepositoryBase<Employee>, IEmployeeRepository 
+    { 
+        public EmployeeRepository(RepositoryContext repositoryContext) : base(repositoryContext) 
         {
 
         }
@@ -24,9 +24,15 @@ namespace Repository
             bool trackChanges
         )
         {
-            var employees = await FindByCondition(employee => employee.CompanyId.Equals(companyId), trackChanges)
-                    .OrderBy(employee => employee.Name)
-                    .ToListAsync();
+            var employees = await FindByCondition(
+                    employee => 
+                        employee.CompanyId.Equals(companyId)
+                        && 
+                        ( employee.Age >= employeeParameters.MinAge && employee.Age <= employeeParameters.MaxAge),
+                    trackChanges
+                )
+                .OrderBy(employee => employee.Name)
+                .ToListAsync();
 
             return PagedList<Employee>
                 .ToPagedList(
@@ -36,7 +42,7 @@ namespace Repository
                 );
         }
 
-        public async Task<Employee> GetEmployeeAsync(Guid companyId, Guid id, bool trackChanges) =>
+        public async Task<Employee> GetEmployeeAsync(Guid companyId, Guid id, bool trackChanges) => 
             await FindByCondition(e => e.CompanyId.Equals(companyId) && e.Id.Equals(id), trackChanges)
                 .SingleOrDefaultAsync();
 
@@ -48,5 +54,5 @@ namespace Repository
         }
 
         public void DeleteEmployee(Employee employee) => Delete(employee);
-    }
+        }
 }
