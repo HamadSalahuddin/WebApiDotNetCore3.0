@@ -3,6 +3,7 @@ using Entities;
 using Entities.Models;
 using Entities.RequestFeatures;
 using Microsoft.EntityFrameworkCore;
+using Repository.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,12 +26,11 @@ namespace Repository
         )
         {
             var employees = await FindByCondition(
-                    employee => 
-                        employee.CompanyId.Equals(companyId)
-                        && 
-                        ( employee.Age >= employeeParameters.MinAge && employee.Age <= employeeParameters.MaxAge),
+                    employee => employee.CompanyId.Equals(companyId),
                     trackChanges
                 )
+                .FilterEmployees(employeeParameters.MinAge, employeeParameters.MaxAge)
+                .Search(employeeParameters.SearchTerm)
                 .OrderBy(employee => employee.Name)
                 .ToListAsync();
 
