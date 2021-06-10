@@ -3,6 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Linq.Dynamic.Core;
+using System.Reflection;
+using Repository.Extensions.Utilities;
 
 namespace Repository.Extensions
 {
@@ -21,7 +24,7 @@ namespace Repository.Extensions
             string searchTerm
         )
         {
-            if(string.IsNullOrWhiteSpace(searchTerm))
+            if (string.IsNullOrWhiteSpace(searchTerm))
             {
                 return employees;
             }
@@ -29,6 +32,25 @@ namespace Repository.Extensions
             var lowerCaseTerm = searchTerm.Trim().ToLower();
             return employees.Where(employee => employee.Name.ToLower().Contains(lowerCaseTerm));
         }
-        
+
+        public static IQueryable<Employee> Sort(
+            this IQueryable<Employee> employees,
+            string orderByQueryString
+        )
+        {
+            //orderBy=name,age desc
+            if (string.IsNullOrWhiteSpace(orderByQueryString))
+            {
+                return employees.OrderBy(employee => employee.Name);
+            }
+
+            var orderQuery = OrderQueryBuilder.CreateOrderQuery<Employee>(orderByQueryString);
+            
+            if (string.IsNullOrWhiteSpace(orderQuery))
+            {
+                return employees.OrderBy(e => e.Name);
+            }
+            return employees.OrderBy(orderQuery);
+        }
     }
 }
