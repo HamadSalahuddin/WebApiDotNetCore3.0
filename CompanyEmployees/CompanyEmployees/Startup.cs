@@ -38,6 +38,7 @@ namespace CompanyEmployees
             services.ConfigureRepositoryManager();
             services.ConfigureActionFilterAsService();
             services.AddAutoMapper(typeof(Startup));
+            services.ConfigureEmployeeDataShaper();
 
             services.AddControllers(config =>
             {
