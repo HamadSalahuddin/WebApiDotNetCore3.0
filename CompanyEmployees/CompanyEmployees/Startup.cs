@@ -39,6 +39,7 @@ namespace CompanyEmployees
             services.ConfigureActionFilterAsService();
             services.AddAutoMapper(typeof(Startup));
             services.ConfigureEmployeeDataShaper();
+            services.ConfigureHyperlinkAsTheEngineOfApplicationState();
 
             services.AddControllers(config =>
             {
@@ -47,6 +48,8 @@ namespace CompanyEmployees
             }).AddNewtonsoftJson()
             .AddXmlDataContractSerializerFormatters()
             .AddCustomCSVFormatter();
+
+            services.AddCustomMediaTypes();
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
