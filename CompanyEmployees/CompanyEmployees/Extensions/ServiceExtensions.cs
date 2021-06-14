@@ -91,6 +91,10 @@ namespace CompanyEmployees.Extensions
                 {
                     xmlOutputFormatter
                         .SupportedMediaTypes
+                        .Add("application/vnd.codemaze.hateoas+xml");
+
+                    xmlOutputFormatter
+                        .SupportedMediaTypes
                         .Add("application/vnd.codemaze.apiroot+xml");
                 }
             });
