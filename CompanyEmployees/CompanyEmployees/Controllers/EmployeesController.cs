@@ -42,6 +42,7 @@ namespace CompanyEmployees.Controllers
         }
 
         [HttpGet]
+        [HttpHead]
         [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
         public async Task<IActionResult> GetEmployeesForCompanyAsync(
             Guid companyId,
