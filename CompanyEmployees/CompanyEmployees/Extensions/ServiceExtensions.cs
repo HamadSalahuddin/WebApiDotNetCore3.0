@@ -1,4 +1,5 @@
 ﻿using CompanyEmployees.ActionFilters;
+using CompanyEmployees.Controllers;
 using CompanyEmployees.Utility;
 using Contracts;
 using Entities;
@@ -7,6 +8,7 @@ using LoggerService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -103,6 +105,19 @@ namespace CompanyEmployees.Extensions
         public static void ConfigureHyperlinkAsTheEngineOfApplicationState(this IServiceCollection services)
         {
             services.AddScoped<EmployeeLinks>();
+        }
+
+        public static void ConfigureVersioning(this IServiceCollection services)
+        {
+            services.AddApiVersioning(option =>
+            {
+                option.ReportApiVersions = true;
+                option.AssumeDefaultVersionWhenUnspecified = true;
+                option.DefaultApiVersion = new ApiVersion(1, 0);
+                option.ApiVersionReader = new HeaderApiVersionReader("api-version");
+                option.Conventions.Controller<CompaniesController>().HasApiVersion(new ApiVersion(1,0));
+                option.Conventions.Controller<CompaniesV2Controller>().HasDeprecatedApiVersion(new ApiVersion(2, 0));
+            });
         }
     }
 }

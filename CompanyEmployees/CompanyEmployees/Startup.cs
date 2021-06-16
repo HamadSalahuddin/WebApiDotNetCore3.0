@@ -50,6 +50,7 @@ namespace CompanyEmployees
             .AddCustomCSVFormatter();
 
             services.AddCustomMediaTypes();
+            services.ConfigureVersioning();
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
