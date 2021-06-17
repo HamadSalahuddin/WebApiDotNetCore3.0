@@ -45,12 +45,15 @@ namespace CompanyEmployees
             {
                 config.RespectBrowserAcceptHeader = true;
                 config.ReturnHttpNotAcceptable = true;
+                config.CacheProfiles.Add("120SecondsDuration", new CacheProfile { Duration = 120 });
             }).AddNewtonsoftJson()
             .AddXmlDataContractSerializerFormatters()
             .AddCustomCSVFormatter();
 
             services.AddCustomMediaTypes();
             services.ConfigureVersioning();
+            services.ConfigureResponseCaching();
+            services.ConfigureHttpCacheHeaders();
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
@@ -82,6 +85,10 @@ namespace CompanyEmployees
             app.ConfigureExceptionHandler(logger);
 
             app.UseHttpsRedirection();
+
+            app.UseResponseCaching();
+
+            app.UseHttpCacheHeaders();
 
             app.UseRouting();
 

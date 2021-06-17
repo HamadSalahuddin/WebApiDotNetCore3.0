@@ -15,6 +15,7 @@ namespace CompanyEmployees.Controllers
 {
     //[ApiVersion("1.0")]
     [Route("api/companies")]
+    //[ResponseCache(CacheProfileName = "120SecondsDuration")]
     [ApiController]
     public class CompaniesController : ControllerBase
     {
@@ -41,6 +42,7 @@ namespace CompanyEmployees.Controllers
         }
 
         [HttpGet("{id}", Name = "CompanyById")]
+        [ResponseCache(Duration = 60)]
         public async Task<IActionResult> GetCompany(Guid id)
         {
             var company = await _repository.Company
