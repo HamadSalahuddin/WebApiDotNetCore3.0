@@ -1,3 +1,4 @@
+using AspNetCoreRateLimit;
 using AutoMapper;
 using CompanyEmployees.Extensions;
 using Contracts;
@@ -50,10 +51,24 @@ namespace CompanyEmployees
             .AddXmlDataContractSerializerFormatters()
             .AddCustomCSVFormatter();
 
+            //confguring customer media type.
             services.AddCustomMediaTypes();
+
+            //configuring versioning
             services.ConfigureVersioning();
+
+            // configuring caching
             services.ConfigureResponseCaching();
             services.ConfigureHttpCacheHeaders();
+
+            // Limiting Api Calls.
+            //services.AddMemoryCache();
+            //services.ConfigureRateLimitingOptions();
+            //services.AddHttpContextAccessor();
+
+            // Identity And Authentication.
+            services.AddAuthentication();
+            services.ConfigureIdentity();
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
@@ -90,7 +105,11 @@ namespace CompanyEmployees
 
             app.UseHttpCacheHeaders();
 
+            //app.UseIpRateLimiting();
+
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
