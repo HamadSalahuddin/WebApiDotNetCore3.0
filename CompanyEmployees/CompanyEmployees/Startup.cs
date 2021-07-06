@@ -69,6 +69,9 @@ namespace CompanyEmployees
             // Identity And Authentication.
             services.AddAuthentication();
             services.ConfigureIdentity();
+            services.ConfigJWT(Configuration);
+
+            services.ConfigureAuthenticationManager();
 
             services.Configure<ApiBehaviorOptions>(options =>
             {

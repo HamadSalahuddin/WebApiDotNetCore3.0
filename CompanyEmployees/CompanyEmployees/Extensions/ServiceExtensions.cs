@@ -8,6 +8,7 @@ using Entities.DataTransferObjects;
 using Entities.Models;
 using LoggerService;
 using Marvin.Cache.Headers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -17,10 +18,13 @@ using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Repository;
 using Repository.DataShaping;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace CompanyEmployees.Extensions
 {
@@ -186,5 +190,35 @@ namespace CompanyEmployees.Extensions
             builder.AddEntityFrameworkStores<RepositoryContext>()
                 .AddDefaultTokenProviders();
         }
+
+        public static void ConfigJWT(this IServiceCollection services, IConfiguration configuration)
+        {
+            var jwtSettings = configuration.GetSection("JwtSettings");
+            var secretKey = Environment.GetEnvironmentVariable("SECRET");
+
+            services.AddAuthentication(option =>
+           {
+               option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+               option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+           })
+                .AddJwtBearer(option =>
+               {
+                   option.TokenValidationParameters = new TokenValidationParameters
+                   {
+                       ValidateIssuer = true,
+                       ValidateAudience = true,
+                       ValidateLifetime = true,
+                       ValidateIssuerSigningKey = true,
+
+                       ValidIssuer = jwtSettings.GetSection("validIssuer").Value,
+                       ValidAudience = jwtSettings.GetSection("validAudience").Value,
+                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
+                   };
+               });
+        }
+
+        public static void ConfigureAuthenticationManager(this IServiceCollection services)
+            =>
+                services.AddScoped<IAuthenticationManager, AuthenticationManager>();
     }
 }
