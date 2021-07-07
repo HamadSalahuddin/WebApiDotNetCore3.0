@@ -73,6 +73,8 @@ namespace CompanyEmployees
 
             services.ConfigureAuthenticationManager();
 
+            services.ConfigureSwagger();
+
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.SuppressModelStateInvalidFilter = true;
@@ -120,6 +122,13 @@ namespace CompanyEmployees
             {
                 endpoints.MapControllers();
             });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(s =>
+           {
+               s.SwaggerEndpoint("/swagger/v1/swagger.json", "Code Maze API v1");
+               s.SwaggerEndpoint("/swagger/v2/swagger.json", "Code Maze API v2");
+           });
         }
     }
 }
