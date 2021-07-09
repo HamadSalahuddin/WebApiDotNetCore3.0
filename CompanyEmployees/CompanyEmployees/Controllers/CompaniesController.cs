@@ -35,7 +35,7 @@ namespace CompanyEmployees.Controllers
         ///  Gets the list of all companies
         /// </summary>
         /// <returns> The Companies list</returns>
-        [HttpGet(Name = "GetCompanies"), Authorize(Roles = "Manager")]        
+        [HttpGet(Name = "GetCompanies"), Authorize(Roles = "Manager")]
         public async Task<IActionResult> GetCompanies()
         {
             //throw new Exception("Exception");

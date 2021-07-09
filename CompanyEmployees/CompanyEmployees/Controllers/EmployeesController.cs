@@ -49,6 +49,7 @@ namespace CompanyEmployees.Controllers
             [FromQuery] EmployeeParameters employeeParameters
         )
         {
+            var logMessage = string.Empty;
             if (!employeeParameters.ValidAgeRange)
             {
                 return BadRequest("Max age can't be less than min age.");
@@ -57,8 +58,9 @@ namespace CompanyEmployees.Controllers
 
             if (company == null)
             {
-                _logger.LogInfo($"Company with id: {companyId} doesn't exist in the database.");
-                return NotFound();
+                logMessage = $"Company with id: {companyId} doesn't exist in the database.";
+                _logger.LogInfo(logMessage);
+                return NotFound(logMessage);
             }
 
             var employeesFromDb = await _repository.Employee.GetEmployeesAsync(
@@ -89,16 +91,19 @@ namespace CompanyEmployees.Controllers
         public async Task<IActionResult> GetEmployeeForCompany(Guid companyId, Guid id)
         {
             var company = await _repository.Company.GetCompanyAsync(companyId, trackChanges: false);
+            var logMessage = string.Empty;
             if (company == null)
             {
-                _logger.LogInfo($"Company with id: {companyId} doesn't exist in the database.");
-                return NotFound();
+                logMessage = $"Company with id: {companyId} doesn't exist in the database.";
+                _logger.LogInfo(logMessage);
+                return NotFound(logMessage);
             }
             var employeeDb = await _repository.Employee.GetEmployeeAsync(companyId, id, trackChanges: false);
             if (employeeDb == null)
             {
-                _logger.LogInfo($"Employee with id: {id} doesn't exist in the database.");
-                return NotFound();
+                logMessage = $"Employee with id: {id} doesn't exist in the database.";
+                _logger.LogInfo(logMessage);
+                return NotFound(logMessage);
             }
             var employee = _mapper.Map<EmployeeDto>(employeeDb);
             return Ok(employee);
