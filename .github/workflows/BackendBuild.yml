@@ -18,7 +18,6 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
-      run: dotnet restore
-      working-directory: WebApiDotNetCore3.0\CompanyEmployees\CompanyEmployees.sln
+      run: dotnet restore ./WebApiDotNetCore3.0/CompanyEmployees/CompanyEmployees.sln
     - name: Build
       run: dotnet build --no-restore
