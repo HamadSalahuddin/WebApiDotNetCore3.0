@@ -19,6 +19,6 @@ jobs:
         dotnet-version: 5.0.x
     - name: Restore dependencies
       run: dotnet restore
-      working-directory: ./WebApiDotNetCore3.0
+      working-directory: ./WebApiDotNetCore3.0/CompanyEmployees/CompanyEmployees/CompanyEmployees.csproj
     - name: Build
       run: dotnet build --no-restore
