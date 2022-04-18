@@ -31,7 +31,7 @@ jobs:
       run: dotnet restore
       
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build WebApiDotNetCore3.0/CompanyEmployees/CompanyEmployees.csproj --configuration Release --no-restore
       
 #name: .NET
 #on:
