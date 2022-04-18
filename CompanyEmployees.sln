@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompanyEmployees", "CompanyEmployees\CompanyEmployees.csproj", "{D453C80B-F194-4B2F-97EC-EA914410662F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompanyEmployees", "CompanyEmployees\CompanyEmployees\CompanyEmployees.csproj", "{D453C80B-F194-4B2F-97EC-EA914410662F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Contracts\Contracts.csproj", "{CEB1E453-7396-409C-AA87-C66112D2594B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "CompanyEmployees\Contracts\Contracts.csproj", "{CEB1E453-7396-409C-AA87-C66112D2594B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoggerService", "LoggerService\LoggerService.csproj", "{D09CB01C-5EB1-451F-A0F4-E19845AD8231}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoggerService", "CompanyEmployees\LoggerService\LoggerService.csproj", "{D09CB01C-5EB1-451F-A0F4-E19845AD8231}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{5A18B991-DBD7-460C-9F8C-A2C2CD9DC477}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "CompanyEmployees\Entities\Entities.csproj", "{5A18B991-DBD7-460C-9F8C-A2C2CD9DC477}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{169E5429-4AEF-4E57-A5D9-3E0C88A5CD6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "CompanyEmployees\Repository\Repository.csproj", "{169E5429-4AEF-4E57-A5D9-3E0C88A5CD6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompanyEmployeesTests", "CompanyEmployeesTests\CompanyEmployeesTests.csproj", "{1A08DED2-C099-4112-87D3-773DCA41F20A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompanyEmployeesTests", "CompanyEmployees\CompanyEmployeesTests\CompanyEmployeesTests.csproj", "{1A08DED2-C099-4112-87D3-773DCA41F20A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
