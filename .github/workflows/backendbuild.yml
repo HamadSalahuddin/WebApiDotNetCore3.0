@@ -1,19 +1,54 @@
-name: .NET
+name: build-source
+
 on:
   push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
+    paths:
+    - '**.cs'
+    - '**.csproj'
+
+env:
+  DOTNET_VERSION: '5.0.301' # The .NET SDK version to use
+
 jobs:
   build:
-    runs-on: windows-latest
+
+    name: build-${{matrix.os}}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+
     steps:
     - uses: actions/checkout@v2
-    - name: Setup .NET
+    - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
-    - name: Restore dependencies
-      run: dotnet restore ./WebApiDotNetCore3.0/CompanyEmployees/CompanyEmployees/CompanyEmployees.csproj
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Install dependencies
+      run: dotnet restore
+      
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --configuration Release --no-restore
+      
+#name: .NET
+#on:
+#  push:
+#    branches: [ main ]
+#  pull_request:
+#    branches: [ main ]
+#jobs:
+#  build:
+#    runs-on: windows-latest
+#    steps:
+#    - uses: actions/checkout@v2
+#    - name: Setup .NET
+#      uses: actions/setup-dotnet@v1
+#      with:
+#        dotnet-version: 5.0.x
+#    - name: Restore dependencies
+#      run: dotnet restore ./WebApiDotNetCore3.0/CompanyEmployees/CompanyEmployees/CompanyEmployees.csproj
+#    - name: Build
+#      run: dotnet build --no-restore
