@@ -28,7 +28,7 @@ jobs:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
     - name: Install dependencies
-      run: dotnet restore ./WebApiDotNetCore3.0/CompanyEmployees/CompanyEmployees.sln
+      run: dotnet restore ./WebApiDotNetCore3.0/CompanyEmployees.sln
       
     - name: Build
       run: dotnet build WebApiDotNetCore3.0/CompanyEmployees/CompanyEmployees.csproj --configuration Release --no-restore
